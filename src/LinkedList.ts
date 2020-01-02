@@ -1,10 +1,12 @@
+import {Sorter} from "./Sorter";
+
 class Node {
     next: Node | null = null;
 
     constructor(public data: number) {}
 }
 
-export class LinkedList {
+export class LinkedList extends Sorter{
     get length(): number {
         if(!this.head){
             return 0;
@@ -17,6 +19,8 @@ export class LinkedList {
             length++;
             node = node.next;
         }
+
+        return length;
     }
 
     head: Node | null = null;
@@ -68,5 +72,21 @@ export class LinkedList {
     swap(leftIndex: number, rightIndex: number): void {
         const leftNode = this.at(leftIndex);
         const rightNode = this.at(rightIndex);
+
+        const leftHand = leftNode.data;
+        leftNode.data = rightNode.data;
+        rightNode.data = leftHand;
+    }
+
+    print(): void {
+        if(!this.head){
+            return;
+        }
+
+        let node: Node | null = this.head;
+        while(node){
+            console.log(node.data);
+            node = node.next;
+        }
     }
 }
